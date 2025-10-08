@@ -2,7 +2,7 @@ package com.payroc.loadbalancer.management.registry;
 
 import java.util.Vector;
 
-public class InMemoryEndpointRegistryImpl implements EndpointRegistry {
+public class InMemoryEndpointRegistry implements EndpointRegistry {
 
     private Vector endpoints = new Vector();
 

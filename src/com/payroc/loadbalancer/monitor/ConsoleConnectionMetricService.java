@@ -5,7 +5,7 @@ import com.payroc.loadbalancer.management.registry.Endpoint;
 import java.util.Hashtable;
 import java.util.Enumeration;
 
-public class ConsoleMetricService implements MetricService {
+public class ConsoleConnectionMetricService implements ConnectionMetricService {
     private Hashtable successCounts = new Hashtable();
     private Hashtable failureCounts = new Hashtable();
 

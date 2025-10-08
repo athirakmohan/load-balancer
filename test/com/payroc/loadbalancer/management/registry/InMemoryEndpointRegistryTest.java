@@ -1,15 +1,13 @@
 package com.payroc.loadbalancer.management.registry;
 
 import junit.framework.TestCase;
-import com.payroc.loadbalancer.management.registry.Endpoint;
-import com.payroc.loadbalancer.management.registry.InMemoryEndpointRegistryImpl;
 
-public class InMemoryEndpointRegistryImplTest extends TestCase {
+public class InMemoryEndpointRegistryTest extends TestCase {
 
-    private InMemoryEndpointRegistryImpl registry;
+    private InMemoryEndpointRegistry registry;
 
     protected void setUp() {
-        registry = new InMemoryEndpointRegistryImpl();
+        registry = new InMemoryEndpointRegistry();
     }
 
     public void testAddAndRetrieve() {

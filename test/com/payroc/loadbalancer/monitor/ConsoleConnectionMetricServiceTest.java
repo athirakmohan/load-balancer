@@ -2,17 +2,16 @@ package com.payroc.loadbalancer.monitor;
 
 import junit.framework.TestCase;
 import com.payroc.loadbalancer.management.registry.Endpoint;
-import com.payroc.loadbalancer.monitor.ConsoleMetricService;
 
 import java.util.Hashtable;
 
-public class ConsoleMetricServiceTest extends TestCase {
-    private ConsoleMetricService metricService;
+public class ConsoleConnectionMetricServiceTest extends TestCase {
+    private ConsoleConnectionMetricService metricService;
     private Endpoint endpoint1;
     private Endpoint endpoint2;
 
     protected void setUp() {
-        metricService = new ConsoleMetricService();
+        metricService = new ConsoleConnectionMetricService();
         endpoint1 = new Endpoint("10.0.0.1", 8080);
         endpoint2 = new Endpoint("10.0.0.2", 8080);
     }

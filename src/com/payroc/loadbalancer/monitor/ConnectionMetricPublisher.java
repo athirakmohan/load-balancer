@@ -5,13 +5,13 @@ import java.util.Hashtable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MetricPublisher  {
-    private MetricService metricService;
+public class ConnectionMetricPublisher {
+    private ConnectionMetricService connectionMetricService;
     private long reportInterval = 30000; // 30 seconds
     private final Timer timer;
 
-    public MetricPublisher(MetricService metricService) {
-        this.metricService = metricService;
+    public ConnectionMetricPublisher(ConnectionMetricService connectionMetricService) {
+        this.connectionMetricService = connectionMetricService;
         this.timer = new Timer(true);
     }
     public void start() {
@@ -29,7 +29,7 @@ public class MetricPublisher  {
             try {
                 System.out.println("\n[MetricPublisher][" + Thread.currentThread().getName() + "] Load Balancer Metrics...");
 
-                Hashtable allMetrics = metricService.getMetrics();
+                Hashtable allMetrics = connectionMetricService.getMetrics();
                 Enumeration keys = allMetrics.keys();
                 while (keys.hasMoreElements()) {
                     String endpointKey = (String) keys.nextElement();

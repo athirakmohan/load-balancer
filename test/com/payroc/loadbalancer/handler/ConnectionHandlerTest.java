@@ -3,16 +3,12 @@ package com.payroc.loadbalancer.handler;
 import com.payroc.loadbalancer.handler.algorithm.Algorithm;
 import com.payroc.loadbalancer.management.registry.Endpoint;
 import com.payroc.loadbalancer.management.registry.EndpointRegistry;
-import com.payroc.loadbalancer.monitor.MetricService;
+import com.payroc.loadbalancer.monitor.ConnectionMetricService;
 import junit.framework.TestCase;
-import com.payroc.loadbalancer.handler.ConnectionHandler;
 
-import java.io.IOException;
 import java.net.Socket;
 
-import junit.framework.TestCase;
 import java.io.*;
-import java.net.Socket;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -20,10 +16,10 @@ public class ConnectionHandlerTest extends TestCase {
 
     private EndpointRegistry registry;
     private Algorithm algorithm;
-    private MetricService metrics;
+    private ConnectionMetricService metrics;
 
     public void setUp() {
-        // Mock registry
+
         registry = new EndpointRegistry() {
             private Vector endpoints = new Vector();
             public Vector getAvailableEndpoints() { return (Vector) endpoints.clone(); }
@@ -44,7 +40,7 @@ public class ConnectionHandlerTest extends TestCase {
             }
         };
 
-        metrics = new MetricService() {
+        metrics = new ConnectionMetricService() {
             public void recordSuccess(Endpoint e) {
                 System.out.println("Success recorded for " + e);
             }

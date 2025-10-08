@@ -10,14 +10,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 
-public class TcpHealthCheckServiceImpl implements HealthCheckService {
+public class TcpHealthCheckService implements HealthCheckService {
     private EndpointRegistry registry;
     private AlertsService alertsService;
     private long checkInterval = 5000; // 5 seconds
     private Vector monitoredEndpoints;
     private final Timer timer;
 
-    public TcpHealthCheckServiceImpl(EndpointRegistry registry, AlertsService alertsService) {
+    public TcpHealthCheckService(EndpointRegistry registry, AlertsService alertsService) {
         this.registry = registry;
         this.alertsService = alertsService;
         monitoredEndpoints = registry.getAvailableEndpoints();

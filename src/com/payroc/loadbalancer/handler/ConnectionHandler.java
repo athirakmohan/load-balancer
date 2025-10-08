@@ -3,7 +3,7 @@ package com.payroc.loadbalancer.handler;
 import com.payroc.loadbalancer.handler.algorithm.Algorithm;
 import com.payroc.loadbalancer.management.registry.Endpoint;
 import com.payroc.loadbalancer.management.registry.EndpointRegistry;
-import com.payroc.loadbalancer.monitor.MetricService;
+import com.payroc.loadbalancer.monitor.ConnectionMetricService;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -13,13 +13,13 @@ public class ConnectionHandler implements Runnable {
     private Socket clientSocket;
     private EndpointRegistry registry;
     private Algorithm algorithm;
-    private MetricService metricService;
+    private ConnectionMetricService connectionMetricService;
 
-    public ConnectionHandler(Socket clientSocket, EndpointRegistry registry, Algorithm algorithm, MetricService metricService) {
+    public ConnectionHandler(Socket clientSocket, EndpointRegistry registry, Algorithm algorithm, ConnectionMetricService connectionMetricService) {
         this.clientSocket = clientSocket;
         this.registry = registry;
         this.algorithm = algorithm;
-        this.metricService = metricService;
+        this.connectionMetricService = connectionMetricService;
     }
 
     public void run() {
@@ -52,12 +52,12 @@ public class ConnectionHandler implements Runnable {
 
         } catch (IOException e) {
             System.out.println("Handler: Connection error: " + e.getMessage());
-            metricService.recordFailure(selectedEndpoint);
+            connectionMetricService.recordFailure(selectedEndpoint);
         } catch (InterruptedException e) {
             System.out.println("Handler: Pipe transfer interrupted");
         } finally {
             if (selectedEndpoint != null && connectionSucceeded) {
-                    metricService.recordSuccess(selectedEndpoint);
+                    connectionMetricService.recordSuccess(selectedEndpoint);
                 }
             closeSocket(clientSocket);
             closeSocket(backendSocket);
