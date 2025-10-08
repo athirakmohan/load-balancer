@@ -10,10 +10,10 @@ import java.net.Socket;
 import java.util.Vector;
 
 public class ConnectionHandler implements Runnable {
-    private Socket clientSocket;
-    private EndpointRegistry registry;
-    private Algorithm algorithm;
-    private MetricService metricService;
+    private final Socket clientSocket;
+    private final EndpointRegistry registry;
+    private final Algorithm algorithm;
+    private final MetricService metricService;
 
     public ConnectionHandler(Socket clientSocket, EndpointRegistry registry, Algorithm algorithm, MetricService metricService) {
         this.clientSocket = clientSocket;

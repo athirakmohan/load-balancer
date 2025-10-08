@@ -5,8 +5,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class Pipe implements Runnable {
-    private InputStream input;
-    private OutputStream output;
+    private final InputStream input;
+    private final OutputStream output;
 
     public Pipe(InputStream input, OutputStream output) {
         this.input = input;

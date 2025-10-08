@@ -6,9 +6,9 @@ import java.util.TimerTask;
 
 public class MetricReportScheduler {
     private final Timer timer;
-    private MetricService metricService;
-    private MetricPublisher metricPublisher;
-    private long reportInterval = 30000; // 30 seconds
+    private final MetricService metricService;
+    private final MetricPublisher metricPublisher;
+    private final long reportInterval = 30000; // 30 seconds
 
     public MetricReportScheduler(MetricService metricService, MetricPublisher metricPublisher) {
         this.metricService = metricService;
