@@ -25,11 +25,11 @@ public class ConsoleConnectionMetricServiceTest extends TestCase {
 
         assertEquals("Endpoint 1 success count should be 2",
                 new Long(2),
-                ((Hashtable)metrics.get(endpoint1.toString())).get("SUCCESS_COUNT"));
+                ((Hashtable) metrics.get(endpoint1.toString())).get("SUCCESS_COUNT"));
 
         assertEquals("Endpoint 2 success count should be 1",
                 new Long(1),
-                ((Hashtable)metrics.get(endpoint2.toString())).get("SUCCESS_COUNT"));
+                ((Hashtable) metrics.get(endpoint2.toString())).get("SUCCESS_COUNT"));
     }
 
     public void testFailureMetricRecording() {
@@ -41,7 +41,7 @@ public class ConsoleConnectionMetricServiceTest extends TestCase {
 
         assertEquals("Endpoint 1 failure count should be 2.",
                 new Long(2),
-                ((Hashtable)metrics.get(endpoint1.toString())).get("FAILURE_COUNT"));
+                ((Hashtable) metrics.get(endpoint1.toString())).get("FAILURE_COUNT"));
     }
 
 }

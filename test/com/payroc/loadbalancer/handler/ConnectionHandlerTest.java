@@ -22,10 +22,15 @@ public class ConnectionHandlerTest extends TestCase {
 
         registry = new EndpointRegistry() {
             private Vector endpoints = new Vector();
-            public Vector getAvailableEndpoints() { return (Vector) endpoints.clone(); }
+
+            public Vector getAvailableEndpoints() {
+                return (Vector) endpoints.clone();
+            }
+
             public void addEndpoint(Endpoint endpoint) {
                 endpoints.addElement(endpoint);
             }
+
             public void removeEndpoint(Endpoint e) {
                 endpoints.removeElement(e);
             }
@@ -44,6 +49,7 @@ public class ConnectionHandlerTest extends TestCase {
             public void recordSuccess(Endpoint e) {
                 System.out.println("Success recorded for " + e);
             }
+
             public void recordFailure(Endpoint e) {
                 System.out.println("Failure recorded for " + e);
             }
@@ -80,9 +86,12 @@ public class ConnectionHandlerTest extends TestCase {
         public InputStream getInputStream() {
             return in;
         }
+
         public OutputStream getOutputStream() {
             return out;
         }
-        public void close() {}
+
+        public void close() {
+        }
     }
 }

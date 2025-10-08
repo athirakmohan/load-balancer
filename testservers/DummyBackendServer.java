@@ -32,7 +32,10 @@ public class DummyBackendServer {
             System.err.println("Could not listen on port " + port + ": " + e.getMessage());
         } finally {
             if (serverSocket != null) {
-                try { serverSocket.close(); } catch (IOException e) {}
+                try {
+                    serverSocket.close();
+                } catch (IOException e) {
+                }
             }
         }
     }
@@ -68,7 +71,10 @@ public class DummyBackendServer {
             } catch (IOException e) {
                 System.err.println("Port " + port + ": I/O error: " + e.getMessage());
             } finally {
-                try { clientSocket.close(); } catch (IOException e) {}
+                try {
+                    clientSocket.close();
+                } catch (IOException e) {
+                }
             }
         }
 

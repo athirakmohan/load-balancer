@@ -1,6 +1,7 @@
 package com.payroc.loadbalancer.management.health;
 
-public interface HealthCheckService  {
+public interface HealthCheckService {
     void start();
+
     void stop();
 }

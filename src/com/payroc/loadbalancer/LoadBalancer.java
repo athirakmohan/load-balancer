@@ -13,13 +13,14 @@ import com.payroc.loadbalancer.management.registry.InMemoryEndpointRegistry;
 import com.payroc.loadbalancer.monitor.ConsoleConnectionMetricService;
 import com.payroc.loadbalancer.monitor.ConnectionMetricPublisher;
 import com.payroc.loadbalancer.monitor.ConnectionMetricService;
+import com.payroc.loadbalancer.util.ParseUtil;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Vector;
 
 public class LoadBalancer {
-    private static final int LISTEN_PORT = 8080;
 
     public static void main(String[] args) {
 
@@ -27,8 +28,12 @@ public class LoadBalancer {
             System.err.println("Provide at least one endpoint as host:port");
             System.exit(1);
         }
+        int listenPort = ParseUtil.parseListenPort(args[0]);
+        Vector endpoints = ParseUtil.parseEndpoints(args, 1);
         EndpointRegistry registry = new InMemoryEndpointRegistry();
-        addEndpointsToRegistry(args, registry);
+        for (int i = 0; i < endpoints.size(); i++) {
+            registry.addEndpoint((Endpoint) endpoints.elementAt(i));
+        }
 
         Algorithm algorithm = new RoundRobinAlgorithm();
         ConnectionMetricService connectionMetricService = new ConsoleConnectionMetricService();
@@ -40,10 +45,10 @@ public class LoadBalancer {
         ConnectionMetricPublisher publisher = new ConnectionMetricPublisher(connectionMetricService);
         publisher.start();
 
-        System.out.println("LoadBalancer: Starting up on port " + LISTEN_PORT);
+        System.out.println("LoadBalancer: Starting up on port " + listenPort);
 
         try {
-            ServerSocket serverSocket = new ServerSocket(LISTEN_PORT);
+            ServerSocket serverSocket = new ServerSocket(listenPort);
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
@@ -63,23 +68,4 @@ public class LoadBalancer {
         }
     }
 
-    private static void addEndpointsToRegistry(String[] args, EndpointRegistry registry) {
-        for (int i = 0; i < args.length; i++) {
-            String arg = args[i];
-            String[] parts = arg.split(":");
-            if (parts.length != 2) {
-                System.err.println("Invalid endpoint format: " + arg + ". Expected host:port");
-                continue;
-            }
-            String host = parts[0];
-            int port;
-            try {
-                port = Integer.parseInt(parts[1]);
-            } catch (NumberFormatException e) {
-                System.err.println("Invalid port number in endpoint: " + arg);
-                continue;
-            }
-            registry.addEndpoint(new Endpoint(host, port));
-        }
-    }
 }

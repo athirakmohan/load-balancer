@@ -57,8 +57,8 @@ public class ConnectionHandler implements Runnable {
             System.out.println("Handler: Pipe transfer interrupted");
         } finally {
             if (selectedEndpoint != null && connectionSucceeded) {
-                    connectionMetricService.recordSuccess(selectedEndpoint);
-                }
+                connectionMetricService.recordSuccess(selectedEndpoint);
+            }
             closeSocket(clientSocket);
             closeSocket(backendSocket);
         }

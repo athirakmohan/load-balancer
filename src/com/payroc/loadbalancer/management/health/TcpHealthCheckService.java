@@ -33,10 +33,9 @@ public class TcpHealthCheckService implements HealthCheckService {
         System.out.println("HealthCheck: Stopping ");
         timer.cancel();
     }
+
     private class HealthCheckTask extends TimerTask {
         public void run() {
-            System.out.println("\n[HealthCheck][" + Thread.currentThread().getName() + "] Checking backend health...");
-
             try {
                 Vector availableEndpoints = (Vector) registry.getAvailableEndpoints();
 

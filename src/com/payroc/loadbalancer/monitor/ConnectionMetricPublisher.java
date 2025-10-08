@@ -14,6 +14,7 @@ public class ConnectionMetricPublisher {
         this.connectionMetricService = connectionMetricService;
         this.timer = new Timer(true);
     }
+
     public void start() {
         System.out.println("MetricPublisher: Starting periodic reporting");
         timer.schedule(new MetricTask(), 0, reportInterval);
@@ -27,7 +28,6 @@ public class ConnectionMetricPublisher {
     private class MetricTask extends TimerTask {
         public void run() {
             try {
-                System.out.println("\n[MetricPublisher][" + Thread.currentThread().getName() + "] Load Balancer Metrics...");
 
                 Hashtable allMetrics = connectionMetricService.getMetrics();
                 Enumeration keys = allMetrics.keys();
@@ -41,10 +41,10 @@ public class ConnectionMetricPublisher {
                     long successCount = (success != null) ? success.longValue() : 0;
                     long failureCount = (failure != null) ? failure.longValue() : 0;
 
-                    System.out.println("Endpoint " + endpointKey
+                    System.out.println("[MetricPublisher][" + Thread.currentThread().getName() + "] Endpoint "
+                            + endpointKey
                             + ": Successes=" + successCount
-                            + ", Failures=" + failureCount
-                    );
+                            + ", Failures=" + failureCount);
                 }
 
 

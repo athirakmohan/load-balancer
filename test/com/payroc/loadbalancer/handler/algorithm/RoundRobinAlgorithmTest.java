@@ -2,6 +2,7 @@ package com.payroc.loadbalancer.handler.algorithm;
 
 import com.payroc.loadbalancer.management.registry.Endpoint;
 import junit.framework.TestCase;
+
 import java.util.Vector;
 
 public class RoundRobinAlgorithmTest extends TestCase {

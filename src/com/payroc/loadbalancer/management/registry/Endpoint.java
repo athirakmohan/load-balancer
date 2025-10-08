@@ -14,12 +14,15 @@ public class Endpoint {
     public String getHost() {
         return host;
     }
+
     public int getPort() {
         return port;
     }
+
     public boolean isAlive() {
         return isAlive;
     }
+
     public void setAlive(boolean alive) {
         isAlive = alive;
     }

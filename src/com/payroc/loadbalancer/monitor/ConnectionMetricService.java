@@ -6,6 +6,8 @@ import java.util.Hashtable;
 
 public interface ConnectionMetricService {
     void recordSuccess(Endpoint endpoint);
+
     void recordFailure(Endpoint endpoint);
+
     Hashtable getMetrics();
 }
