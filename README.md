@@ -32,11 +32,11 @@ Java 1.2+ compatible.
 
 ****Run the load balancer****
 
-java -cp out com.payroc.loadbalancer.LoadBalancer <listenport> <endpoint1> [endpoint2] [endpoint3] ...
+java -cp out com.payroc.loadbalancer.LoadBalancer [listenport] [endpoint1] [endpoint2] [endpoint3] ...
 
-<listenport> → The port on which the load balancer should listen for client connections.
+[listenport] → The port on which the load balancer should listen for client connections.
 
-<endpointX> → Backend endpoints in host:port format. You can specify one or more endpoints.
+[endpointX] → Backend endpoints in host:port format. You can specify one or more endpoints.
 
 ****Architectural improvements****
 
@@ -55,6 +55,6 @@ Below are some of the improvements that can be done to optimise the solution wit
 - Extend the registry to handle named service hosts
 - Enhanced logging instead of using System.out.println.
 
-Modern JDK allows replacing Vector and manual synchronization with concurrent collections and thread pools, using NIO and HTTP/2 for scalable non-blocking I/O . Features like  completableFuture, try with resources, streams, virtual threads and records simplify concurrency, resource management, data processing and asynchronous programming .
+Modern JDK allows replacing vector and manual synchronization with concurrent collections and thread pools, using NIO and HTTP/2 for scalable non-blocking I/O . Features like  completableFuture, try with resources, streams, virtual threads and records simplify concurrency, resource management, data processing and asynchronous programming .
 
 
