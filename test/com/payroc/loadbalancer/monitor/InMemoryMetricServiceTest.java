@@ -5,13 +5,13 @@ import com.payroc.loadbalancer.management.registry.Endpoint;
 
 import java.util.Hashtable;
 
-public class ConsoleConnectionMetricServiceTest extends TestCase {
-    private ConsoleConnectionMetricService metricService;
+public class InMemoryMetricServiceTest extends TestCase {
+    private InMemoryMetricService metricService;
     private Endpoint endpoint1;
     private Endpoint endpoint2;
 
     protected void setUp() {
-        metricService = new ConsoleConnectionMetricService();
+        metricService = new InMemoryMetricService();
         endpoint1 = new Endpoint("10.0.0.1", 8080);
         endpoint2 = new Endpoint("10.0.0.2", 8080);
     }

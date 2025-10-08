@@ -40,20 +40,20 @@ public class TcpHealthCheckService implements HealthCheckService {
                 Vector availableEndpoints = (Vector) registry.getAvailableEndpoints();
 
                 for (int i = 0; i < monitoredEndpoints.size(); i++) {
-                    Endpoint e = (Endpoint) monitoredEndpoints.elementAt(i);
-                    boolean isReachable = checkEndpoint(e.getHost(), e.getPort());
+                    Endpoint endpoint = (Endpoint) monitoredEndpoints.elementAt(i);
+                    boolean isReachable = checkEndpoint(endpoint.getHost(), endpoint.getPort());
 
-                    if (e.isAlive() && !isReachable) {
-                        e.setAlive(false);
-                        if (availableEndpoints.contains(e)) {
-                            registry.removeEndpoint(e);
-                            alertsService.sendAlert("Backend DOWN: " + e);
+                    if (endpoint.isAlive() && !isReachable) {
+                        endpoint.setAlive(false);
+                        if (availableEndpoints.contains(endpoint)) {
+                            registry.removeEndpoint(endpoint);
+                            alertsService.sendAlert("Backend DOWN: " + endpoint);
                         }
-                    } else if (!e.isAlive() && isReachable) {
-                        e.setAlive(true);
-                        if (!availableEndpoints.contains(e)) {
-                            registry.addEndpoint(e);
-                            alertsService.sendAlert("Backend RECOVERED: " + e);
+                    } else if (!endpoint.isAlive() && isReachable) {
+                        endpoint.setAlive(true);
+                        if (!availableEndpoints.contains(endpoint)) {
+                            registry.addEndpoint(endpoint);
+                            alertsService.sendAlert("Backend RECOVERED: " + endpoint);
                         }
                     }
                 }

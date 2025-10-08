@@ -3,7 +3,7 @@ package com.payroc.loadbalancer.handler;
 import com.payroc.loadbalancer.handler.algorithm.Algorithm;
 import com.payroc.loadbalancer.management.registry.Endpoint;
 import com.payroc.loadbalancer.management.registry.EndpointRegistry;
-import com.payroc.loadbalancer.monitor.ConnectionMetricService;
+import com.payroc.loadbalancer.monitor.MetricService;
 import junit.framework.TestCase;
 
 import java.net.Socket;
@@ -16,7 +16,7 @@ public class ConnectionHandlerTest extends TestCase {
 
     private EndpointRegistry registry;
     private Algorithm algorithm;
-    private ConnectionMetricService metrics;
+    private MetricService metrics;
 
     public void setUp() {
 
@@ -45,7 +45,7 @@ public class ConnectionHandlerTest extends TestCase {
             }
         };
 
-        metrics = new ConnectionMetricService() {
+        metrics = new MetricService() {
             public void recordSuccess(Endpoint e) {
                 System.out.println("Success recorded for " + e);
             }

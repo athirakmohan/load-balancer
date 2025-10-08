@@ -10,9 +10,7 @@ import com.payroc.loadbalancer.management.health.TcpHealthCheckService;
 import com.payroc.loadbalancer.management.registry.Endpoint;
 import com.payroc.loadbalancer.management.registry.EndpointRegistry;
 import com.payroc.loadbalancer.management.registry.InMemoryEndpointRegistry;
-import com.payroc.loadbalancer.monitor.ConsoleConnectionMetricService;
-import com.payroc.loadbalancer.monitor.ConnectionMetricPublisher;
-import com.payroc.loadbalancer.monitor.ConnectionMetricService;
+import com.payroc.loadbalancer.monitor.*;
 import com.payroc.loadbalancer.util.ParseUtil;
 
 import java.io.IOException;
@@ -29,21 +27,18 @@ public class LoadBalancer {
             System.exit(1);
         }
         int listenPort = ParseUtil.parseListenPort(args[0]);
-        Vector endpoints = ParseUtil.parseEndpoints(args, 1);
-        EndpointRegistry registry = new InMemoryEndpointRegistry();
-        for (int i = 0; i < endpoints.size(); i++) {
-            registry.addEndpoint((Endpoint) endpoints.elementAt(i));
-        }
+        EndpointRegistry registry = initializeRegistry(args);
 
         Algorithm algorithm = new RoundRobinAlgorithm();
-        ConnectionMetricService connectionMetricService = new ConsoleConnectionMetricService();
         AlertsService alertsService = new ConsoleAlertsService();
 
         HealthCheckService healthChecker = new TcpHealthCheckService(registry, alertsService);
         healthChecker.start();
 
-        ConnectionMetricPublisher publisher = new ConnectionMetricPublisher(connectionMetricService);
-        publisher.start();
+        MetricPublisher consolePublisher = new ConsoleMetricPublisher();
+        MetricService metricService = new InMemoryMetricService();
+        MetricReportScheduler reporter = new MetricReportScheduler(metricService, consolePublisher);
+        reporter.start();
 
         System.out.println("LoadBalancer: Starting up on port " + listenPort);
 
@@ -54,7 +49,7 @@ public class LoadBalancer {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("\nLoadBalancer: Client connected from port " + clientSocket.getPort());
 
-                ConnectionHandler connectionHandler = new ConnectionHandler(clientSocket, registry, algorithm, connectionMetricService);
+                ConnectionHandler connectionHandler = new ConnectionHandler(clientSocket, registry, algorithm, metricService);
                 Thread handlerThread = new Thread(connectionHandler);
                 handlerThread.start();
             }
@@ -62,10 +57,20 @@ public class LoadBalancer {
         } catch (IOException e) {
             System.err.println("LoadBalancer: error on server socket: " + e.getMessage());
         } finally {
-            publisher.stop();
+            reporter.stop();
             healthChecker.stop();
             System.out.println("LoadBalancer: Shut down");
         }
     }
+
+    private static EndpointRegistry initializeRegistry(String[] args) {
+        Vector endpoints = ParseUtil.parseEndpoints(args, 1);
+        EndpointRegistry registry = new InMemoryEndpointRegistry();
+        for (int i = 0; i < endpoints.size(); i++) {
+            registry.addEndpoint((Endpoint) endpoints.elementAt(i));
+        }
+        return registry;
+    }
+
 
 }
