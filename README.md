@@ -11,6 +11,16 @@ Monitors backend availability and automatically removes or restores servers base
 Written in classic java style, it uses vector, hashtable, thread, and timer to manage endpoints, metrics, and health
 checks, without relying on any cloud services.
 
+****Assumptions****
+
+- Limited to Java Version 1.2 (Java 2) features and functionality.
+
+- Backend services are reachable via static IP addresses and ports, no dynamic service discovery is assumed.
+
+- SSL/TLS is not required.
+
+- Load balancing decisions are based purely on network connectivity and availability, not on application level metrics beyond simple TCP checks.
+
 ****High level architecture****
 
 <img width="850" height="675" alt="Screenshot 2025-10-08 at 17 54 53" src="https://github.com/user-attachments/assets/c8e5d40a-dda3-4b04-bcb1-c73df4b9b872" />
@@ -27,14 +37,7 @@ Connection metrics to tracks successful and failed connections.
 
 Configurable endpoints at runtime via command-line arguments.
 
-****Assumptions****
-
-Limited to Java Version 1.2 (Java 2) features and functionality
-Backend services are reachable via static IP addresses and ports; no dynamic service discovery is assumed.
-SSL/TLS is not required 
-Load balancing decisions are based purely on network connectivity and availability, not on application level metrics beyond simple TCP checks.
-
-****Requirements****
+****Setup requirements****
 
 Java 1.2+ compatible.
 
