@@ -14,11 +14,8 @@ checks, without relying on any cloud services.
 ****Assumptions****
 
 - Limited to Java Version 1.2 (Java 2) features and functionality.
-
 - Backend services are reachable via static IP addresses and ports, no dynamic service discovery is assumed.
-
 - SSL/TLS is not required.
-
 - Load balancing decisions are based purely on network connectivity and availability, not on application level metrics beyond simple TCP checks.
 
 ****High level architecture****
@@ -59,12 +56,12 @@ Below are some of the improvements that can be done to optimise the solution wit
   core proxy logic.
 - To horizontally scale the load balancer across multiple instances, the registry would need to be backed by a distributed cache or similar solution
 - Support to dynamically register new backend endpoints at runtime
-- Use an event driven approach for metrics, health and alerts where counters are updated immediately and reporting can
-  be done in batches .This ensures alerts can fire soon for critical ones.
+- Use an event driven approach for metrics and reporting can be done in batches .This ensures alerts can fire soon for critical ones.
 - Enhance resilience with timeouts, failover endpoints, retries, request queuing, circuit breaking, rate limiting and
   load aware routing.
 - Extend the registry to handle named service hosts
 - Enhanced logging instead of using System.out.println.
+- Alerts to trigger based on metric threshold
 
 Modern JDK allows replacing vector and manual synchronization with concurrent collections and thread pools, using NIO and HTTP/2 for scalable non-blocking I/O . Features like  completableFuture, try with resources, streams, virtual threads and records simplify concurrency, resource management, data processing and asynchronous programming .
 
