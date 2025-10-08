@@ -20,15 +20,11 @@ public class DummyBackendServer {
         System.out.println("Starting dummy backend service on port " + port + "...");
 
         try {
-            // Start listening on the specified port
             serverSocket = new ServerSocket(port);
             System.out.println("Service ready. Listening for connections...");
 
-            // Loop forever, accepting client connections
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-
-                // Handle the connection in a separate thread (optional, but good practice)
                 new Thread(new ConnectionHandler(clientSocket, port)).start();
             }
 
@@ -41,7 +37,6 @@ public class DummyBackendServer {
         }
     }
 
-    // Inner class to handle individual client connections
     private static class ConnectionHandler implements Runnable {
         private Socket clientSocket;
         private int port;
@@ -62,10 +57,10 @@ public class DummyBackendServer {
                 while ((line = in.readLine()) != null) {
                     System.out.println("Port " + port + ": Received: " + line);
 
-                    // Send a response back
+
                     String response = "HTTP/1.1 200 OK\r\nContent-Length: 20\r\n\r\nHello from port " + port;
                     out.write(response.getBytes());
-                    out.flush();  // important for immediate delivery
+                    out.flush();
                 }
 
                 System.out.println("Port " + port + ": Client disconnected.");
