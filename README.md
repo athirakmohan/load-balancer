@@ -1,4 +1,4 @@
-****Load Balancer (1999-style)****
+******Load Balancer (1999-style)******
 
 This project implements a basic Layer 4 load balancer with the following capabilities:
 
@@ -8,10 +8,11 @@ Balances traffic across multiple backend services using a round-robin approach.
 
 Monitors backend availability and automatically removes or restores servers based on health.
 
-Written in classic Java style, it uses Vector, Hashtable, Thread, and Timer to manage endpoints, metrics, and health
+Written in classic java style, it uses vector, hashtable, thread, and timer to manage endpoints, metrics, and health
 checks, without relying on any cloud services.
 
 ****High level architecture****
+
 <img width="850" height="675" alt="Screenshot 2025-10-08 at 17 54 53" src="https://github.com/user-attachments/assets/c8e5d40a-dda3-4b04-bcb1-c73df4b9b872" />
 
 ****Features****
@@ -25,6 +26,13 @@ Health check service that monitors backend availability and sends alerts when en
 Connection metrics to tracks successful and failed connections.
 
 Configurable endpoints at runtime via command-line arguments.
+
+****Assumptions****
+
+Limited to Java Version 1.2 (Java 2) features and functionality
+Backend services are reachable via static IP addresses and ports; no dynamic service discovery is assumed.
+SSL/TLS is not required 
+Load balancing decisions are based purely on network connectivity and availability, not on application level metrics beyond simple TCP checks.
 
 ****Requirements****
 
