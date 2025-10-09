@@ -53,8 +53,8 @@ Below are some of the improvements that can be done to optimise the solution wit
 
 - Replace per client thread creation with a manually implemented worker thread pool using a synchronized task queue and
   a fixed set of long-lived worker threads.
-- Extend the Algorithm interface to add LeastConnections, Weighted Round Robin, or other strategies without changing
-  core proxy logic.
+- Extend the Algorithm interface to add least connections, weighted round robin, or other strategies without changing
+  core handler logic.
 - To horizontally scale the load balancer across multiple instances, the registry would need to be backed by a distributed cache or similar solution
 - Support to dynamically register new backend endpoints at runtime
 - Use an event driven approach for metrics and reporting can be done in batches .This ensures alerts can fire soon for critical ones.
@@ -66,6 +66,7 @@ Below are some of the improvements that can be done to optimise the solution wit
 - More tests including integration tests 
 
 Modern JDK allows replacing vector and manual synchronization with concurrent collections and thread pools, using NIO and HTTP/2 for scalable non-blocking I/O . Features like  completableFuture, try with resources, streams, virtual threads and records simplify concurrency, resource management, data processing and asynchronous programming .
+
 
 
 
