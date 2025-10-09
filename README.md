@@ -17,6 +17,7 @@ checks, without relying on any cloud services.
 - Backend services are reachable via static IP addresses and ports, no dynamic service discovery is assumed.
 - SSL/TLS is not required.
 - Load balancing decisions are based purely on network connectivity and availability, not on application level metrics beyond simple TCP checks.
+- User authentication and authorization will be handled by the backend web or application servers, not by the load balancer.
 
 ****High level architecture****
 
