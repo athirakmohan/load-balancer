@@ -63,8 +63,10 @@ Below are some of the improvements that can be done to optimise the solution wit
 - Extend the registry to handle named service hosts
 - Enhanced logging instead of using System.out.println.
 - Alerts to trigger based on metric threshold
+- More tests including integration tests 
 
 Modern JDK allows replacing vector and manual synchronization with concurrent collections and thread pools, using NIO and HTTP/2 for scalable non-blocking I/O . Features like  completableFuture, try with resources, streams, virtual threads and records simplify concurrency, resource management, data processing and asynchronous programming .
+
 
 
 
