@@ -20,7 +20,8 @@ checks, without relying on any cloud services.
 
 ****High level architecture****
 
-<img width="850" height="675" alt="Screenshot 2025-10-08 at 17 54 53" src="https://github.com/user-attachments/assets/c8e5d40a-dda3-4b04-bcb1-c73df4b9b872" />
+<img width="1109" height="670" alt="Screenshot 2025-10-09 at 10 43 23" src="https://github.com/user-attachments/assets/888d8dc3-c50a-4416-9935-a66668774942" />
+
 
 ****Features****
 
@@ -64,5 +65,6 @@ Below are some of the improvements that can be done to optimise the solution wit
 - Alerts to trigger based on metric threshold
 
 Modern JDK allows replacing vector and manual synchronization with concurrent collections and thread pools, using NIO and HTTP/2 for scalable non-blocking I/O . Features like  completableFuture, try with resources, streams, virtual threads and records simplify concurrency, resource management, data processing and asynchronous programming .
+
 
 
